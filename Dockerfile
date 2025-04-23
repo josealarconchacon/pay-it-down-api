@@ -16,9 +16,12 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:18-slim
+FROM node:18
 
 WORKDIR /app
+
+# Set NODE_OPTIONS to enable crypto
+ENV NODE_OPTIONS="--experimental-crypto-policy=legacy"
 
 # Copy package files
 COPY package*.json ./
