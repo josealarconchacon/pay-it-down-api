@@ -6,8 +6,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies with memory optimization
+RUN npm install --no-audit --no-fund --prefer-offline
 
 # Copy source code
 COPY . .
@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:20
+FROM node:20-slim
 
 WORKDIR /app
 
@@ -27,8 +27,8 @@ ENV NODE_ENV=production
 # Copy package files
 COPY package*.json ./
 
-# Install production dependencies only
-RUN npm install --only=production
+# Install production dependencies only with memory optimization
+RUN npm install --only=production --no-audit --no-fund --prefer-offline
 
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
