@@ -1,10 +1,7 @@
 # Build stage
-FROM node:18-alpine AS builder
+FROM node:18 AS builder
 
 WORKDIR /app
-
-# Install build dependencies
-RUN apk add --no-cache python3 make g++
 
 # Copy package files
 COPY package*.json ./
@@ -19,12 +16,9 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:18-alpine
+FROM node:18-slim
 
 WORKDIR /app
-
-# Install production dependencies
-RUN apk add --no-cache python3 make g++
 
 # Copy package files
 COPY package*.json ./
