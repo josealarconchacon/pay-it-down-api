@@ -1,14 +1,13 @@
 # Build stage
-FROM node:20 AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies with memory optimization and increased memory limit
-ENV NODE_OPTIONS="--max-old-space-size=2048"
-RUN npm install --no-audit --no-fund --prefer-offline --no-optional
+# Install dependencies with memory optimization
+RUN npm ci --no-audit --no-fund
 
 # Copy source code
 COPY . .
@@ -17,19 +16,19 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:20-slim
+FROM node:20-alpine
 
 WORKDIR /app
 
-# Set NODE_OPTIONS to enable crypto and limit memory
-ENV NODE_OPTIONS="--experimental-crypto-policy=legacy --max-old-space-size=1024"
+# Set NODE_OPTIONS to enable crypto
+ENV NODE_OPTIONS="--experimental-crypto-policy=legacy"
 ENV NODE_ENV=production
 
 # Copy package files
 COPY package*.json ./
 
-# Install production dependencies only with memory optimization
-RUN npm install --only=production --no-audit --no-fund --prefer-offline --no-optional
+# Install production dependencies only
+RUN npm ci --only=production --no-audit --no-fund
 
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
