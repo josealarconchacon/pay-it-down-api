@@ -1,5 +1,5 @@
 # Build stage
-FROM node:18 AS builder
+FROM node:20 AS builder
 
 WORKDIR /app
 
@@ -16,12 +16,13 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:18
+FROM node:20
 
 WORKDIR /app
 
 # Set NODE_OPTIONS to enable crypto
 ENV NODE_OPTIONS="--experimental-crypto-policy=legacy"
+ENV NODE_ENV=production
 
 # Copy package files
 COPY package*.json ./
