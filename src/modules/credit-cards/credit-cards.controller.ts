@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Put,
 } from "@nestjs/common";
 import { CreditCardsService } from "./credit-cards.service";
 import { CreateCreditCardDto } from "./dto/create-credit-card.dto";
@@ -32,6 +33,14 @@ export class CreditCardsController {
 
   @Patch(":id")
   update(
+    @Param("id") id: string,
+    @Body() updateCreditCardDto: UpdateCreditCardDto
+  ) {
+    return this.creditCardsService.update(id, updateCreditCardDto);
+  }
+
+  @Put(":id")
+  updateWithPut(
     @Param("id") id: string,
     @Body() updateCreditCardDto: UpdateCreditCardDto
   ) {

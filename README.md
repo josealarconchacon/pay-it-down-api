@@ -36,15 +36,12 @@ CREATE DATABASE pay_it_down;
 cp .env.example .env
 ```
 
-5. Update the `.env` file with your database credentials:
-
-```
-DB_HOST=localhost
-DB_PORT=5432
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
-DB_DATABASE=pay_it_down
-```
+5. Update the `.env` file with your configuration:
+   - Database credentials
+   - JWT secret and expiration
+   - CORS origin
+   - API prefix
+   - Port number
 
 ## Running the Application
 
@@ -87,7 +84,3 @@ npm run test:e2e
 # Test coverage
 npm run test:cov
 ```
-
-## License
-
-This project is licensed under the ISC License.
