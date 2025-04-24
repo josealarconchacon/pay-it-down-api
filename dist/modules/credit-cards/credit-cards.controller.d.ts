@@ -8,5 +8,6 @@ export declare class CreditCardsController {
     findAll(): Promise<import("./entities/credit-card.entity").CreditCard[]>;
     findOne(id: string): Promise<import("./entities/credit-card.entity").CreditCard>;
     update(id: string, updateCreditCardDto: UpdateCreditCardDto): Promise<import("./entities/credit-card.entity").CreditCard>;
+    updateWithPut(id: string, updateCreditCardDto: UpdateCreditCardDto): Promise<import("./entities/credit-card.entity").CreditCard>;
     remove(id: string): Promise<void>;
 }

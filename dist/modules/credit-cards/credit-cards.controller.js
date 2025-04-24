@@ -33,6 +33,9 @@ let CreditCardsController = class CreditCardsController {
     update(id, updateCreditCardDto) {
         return this.creditCardsService.update(id, updateCreditCardDto);
     }
+    updateWithPut(id, updateCreditCardDto) {
+        return this.creditCardsService.update(id, updateCreditCardDto);
+    }
     remove(id) {
         return this.creditCardsService.remove(id);
     }
@@ -66,6 +69,14 @@ __decorate([
     __metadata("design:paramtypes", [String, update_credit_card_dto_1.UpdateCreditCardDto]),
     __metadata("design:returntype", void 0)
 ], CreditCardsController.prototype, "update", null);
+__decorate([
+    (0, common_1.Put)(":id"),
+    __param(0, (0, common_1.Param)("id")),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_credit_card_dto_1.UpdateCreditCardDto]),
+    __metadata("design:returntype", void 0)
+], CreditCardsController.prototype, "updateWithPut", null);
 __decorate([
     (0, common_1.Delete)(":id"),
     __param(0, (0, common_1.Param)("id")),
